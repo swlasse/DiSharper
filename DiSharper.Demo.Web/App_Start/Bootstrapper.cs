@@ -9,40 +9,10 @@ namespace MvcApplication4.App_Start
     {
         public static void Initialize()
         {
-            var container = new Kernel(DependencyResolver.Current);
+            var container = DiSharper.DiSharper.SingletonKernel;
             container.Bind<HomeController>().ToSelf();
             container.Bind<ICar, Ferrari>(); //Ferrari, Ford
-            DependencyResolver.SetResolver(container);
+            DependencyResolver.SetResolver(new DiSharperDependencyResolver(container, DependencyResolver.Current));
         }
     }
-
-    //public class MyDependencyResolver : IDependencyResolver
-    //{
-    //    private readonly DiLite _container;
-    //    private readonly IDependencyResolver _resolver;
-
-    //    public MyDependencyResolver(DiLite container, IDependencyResolver resolver)
-    //    {
-    //        _container = container;
-    //        _resolver = resolver;
-    //    }
-
-    //    public object GetService(Type serviceType)
-    //    {
-    //        try
-    //        {
-    //            return _container.Resolve(serviceType);
-    //        }
-    //        catch (Exception)
-    //        {
-    //            return _resolver.GetService(serviceType);
-    //        }
-            
-    //    }
-
-    //    public IEnumerable<object> GetServices(Type serviceType)
-    //    {
-    //        return _resolver.GetServices(serviceType);
-    //    }
-    //}
 }

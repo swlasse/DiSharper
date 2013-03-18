@@ -12,7 +12,7 @@ namespace DiSharper
         /// </summary>
         // TODO: fluent API (scope + more binding), Kernel factory, extract to classes, write tests
 
-        internal delegate object Creator(Kernel container);
+        internal delegate object Creator(IKernel container);
         internal readonly Dictionary<Type, Creator> TypeToCreator = new Dictionary<Type, Creator>();
         internal readonly Dictionary<Type, Type> TypeToType = new Dictionary<Type, Type>();
         internal readonly Dictionary<Type, object> Singletons = new Dictionary<Type, object>();
